@@ -8,7 +8,6 @@ COPY prisma ./prisma/
 RUN npm install --legacy-peer-deps
 
 COPY src ./src
-COPY app.ts ./
 RUN npm run build
 RUN npx prisma generate
 
@@ -17,7 +16,6 @@ FROM node:20-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
-
 RUN apk add --no-cache dumb-init
 
 COPY package*.json ./
@@ -27,7 +25,7 @@ RUN npx prisma generate
 
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 3000
+EXPOSE 5000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
  CMD node -e "require('http').get('http://localhost:5000/health',r=>{if(r.statusCode!==200)process.exit(1)})"
