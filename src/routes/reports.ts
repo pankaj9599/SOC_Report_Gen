@@ -4,8 +4,8 @@ import type { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
-import { PDFGenerator } from '../pdf/generator.ts';
-import type { SecurityFinding, ReportData } from '../pdf/generator.ts';
+import { PDFGenerator } from '../pdf/generator';
+import type { SecurityFinding, ReportData } from '../pdf/generator';
 
 const router = express.Router();
 const prisma = new PrismaClient();
